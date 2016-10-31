@@ -1,0 +1,134 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Faonni
+ *  
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ *
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade module to newer
+ * versions in the future.
+ * 
+ * @package     Faonni_Shape
+ * @copyright   Copyright (c) 2014 Faonni Vitalii(faonni.vitalii@gmail.com) 
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+<config>
+    <modules>
+        <Faonni_Shape>
+            <version>1.1.0</version>
+        </Faonni_Shape>
+    </modules>
+    <global>
+        <models>
+            <faonni_shape>
+                <class>Faonni_Shape_Model</class>
+                <resourceModel>faonni_shape_resource</resourceModel>
+            </faonni_shape>
+            <faonni_shape_resource>
+                <class>Faonni_Shape_Model_Resource</class>
+                <entities>
+                    <rule>
+                        <table>faonni_shape_rule</table>
+                    </rule>
+                    <rule_product>
+                        <table>faonni_shape_rule_product</table>
+                    </rule_product>					
+                    <template>
+                        <table>faonni_shape_template_entity</table>
+                    </template>
+                    <template_entity_varchar>
+                        <table>faonni_shape_template_entity_varchar</table>
+                    </template_entity_varchar>     
+                    <template_entity_text>
+                        <table>faonni_shape_template_entity_text</table>
+                    </template_entity_text>                    
+					<template_eav_attribute>
+                        <table>faonni_shape_template_eav_attribute</table>
+                    </template_eav_attribute>  						
+                </entities>
+            </faonni_shape_resource>
+        </models>
+        <helpers>
+            <faonni_shape>
+                <class>Faonni_Shape_Helper</class>
+            </faonni_shape>
+        </helpers>
+        <blocks>
+            <faonni_shape>
+                <class>Faonni_Shape_Block</class>
+            </faonni_shape>
+        </blocks>
+        <resources>
+            <faonni_shape_setup>
+                <setup>
+                    <module>Faonni_Shape</module>
+                    <class>Faonni_Shape_Model_Resource_Setup</class>
+                </setup>
+            </faonni_shape_setup>
+        </resources>
+		<index>
+            <indexer>
+				<!-- Warning! max length identifier (faonni_shape_indexer) 32 char! -->
+                <faonni_shape_indexer>
+                    <model>faonni_shape/indexer</model>
+                </faonni_shape_indexer>
+            </indexer>
+        </index>			
+    </global>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <faonni_shape before="Mage_Adminhtml">Faonni_Shape_Adminhtml</faonni_shape>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <faonni_shape>
+                    <file>faonni/shape.xml</file>
+                </faonni_shape>
+            </updates>
+        </layout>
+		<events>
+			<shape_rule_save_after>
+				<observers>
+					<faonni_shape_rule_save>
+						<class>faonni_shape/observer_rule</class>
+						<method>saveTemplate</method>
+					</faonni_shape_rule_save>				
+				</observers>
+			</shape_rule_save_after>
+			<shape_rule_delete_before>
+				<observers>
+					<faonni_shape_rule_delete>
+						<class>faonni_shape/observer_rule</class>
+						<method>deleteTemplate</method>
+					</faonni_shape_rule_delete>				
+				</observers>
+			</shape_rule_delete_before>			
+        </events>		
+        <translate>
+            <modules>
+                <Faonni_Shape>
+                    <files>
+                        <default>Faonni_Shape.csv</default>
+                    </files>
+                </Faonni_Shape>
+            </modules>
+        </translate>
+    </adminhtml>
+</config>
